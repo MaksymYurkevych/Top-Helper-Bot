@@ -138,10 +138,23 @@ def sort_files(my_path):
 
 
 def main():
-    try:
-        sort_files(argv[1])
-    except IndexError:
-        print("Please provide a path to a folder to be sorted")
+    sorted_folders = []
+    while True:
+        user_input = input("Provide a path to a folder to be sorted: ")
+
+        if user_input.lower() == "exit":
+            print("Goodbye! Thanks for using our folder sorting app")
+            break
+
+        if not user_input in sorted_folders:
+            if path.isdir(user_input):
+                sorted_folders.append(user_input)
+                sort_files(user_input)
+                print(fr"Path: '{user_input}' was sorted. If you want to finish - type 'exit'")
+            else:
+                print("Your path is incorrect, please try again")
+        else:
+            print("This folder was already sorted, provide another path")
 
 
 if __name__ == '__main__':
